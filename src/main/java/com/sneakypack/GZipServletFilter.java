@@ -16,6 +16,7 @@ public class GZipServletFilter implements Filter {
         mimeTypes.put("txt", "text/plain");
         mimeTypes.put("css", "text/css");
         mimeTypes.put("jpg", "image/jpeg");
+        mimeTypes.put("svg", "image/svg");
     }
 
     @Override
