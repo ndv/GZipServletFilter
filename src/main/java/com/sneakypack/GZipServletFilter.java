@@ -49,6 +49,8 @@ public class GZipServletFilter implements Filter {
                 }
             }
         }
+        httpResponse.setHeader("Vary","Accept-Encoding");
+
         if ( !acceptsGZipEncoding(httpRequest) ) {
             GZipServletResponseWrapper gzipResponse = new GZipServletResponseWrapper(httpResponse);
             chain.doFilter(request, gzipResponse);
@@ -65,11 +67,15 @@ public class GZipServletFilter implements Filter {
 
                 @Override
                 public void setHeader(String name, String value) {
+                    if ("accept-ranges".equals(name.toLowerCase()))
+                        return;
                     super.setHeader(name, value);
                 }
 
                 @Override
                 public void addHeader(String name, String value) {
+                    if ("accept-ranges".equals(name.toLowerCase()))
+                        return;
                     super.addHeader(name, value);
                 }
             });
